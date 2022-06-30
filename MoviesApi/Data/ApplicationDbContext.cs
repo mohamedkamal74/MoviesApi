@@ -10,6 +10,7 @@ namespace MoviesApi.Data
 
         }
         public DbSet<genre> genres { get; set; }
+        public DbSet<Movie> Movies { get; set; }
     }
 
 }

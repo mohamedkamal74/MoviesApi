@@ -23,7 +23,7 @@ namespace MoviesApi.Controllers
             return Ok(genres);
         }
         [HttpPost]
-        public async Task<IActionResult> Createasync(Genredto dto)
+        public async Task<IActionResult> Createasync(GenreDto dto)
         {
             var grnre = new genre { Name = dto.Name };
             await _context.genres.AddAsync(grnre);
@@ -32,7 +32,7 @@ namespace MoviesApi.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult>Updateasync(int id,[FromBody] Genredto dto)
+        public async Task<IActionResult>Updateasync(int id,[FromBody] GenreDto dto)
         {
             var genre = await _context.genres.SingleOrDefaultAsync(g => g.Id == id);
             if (genre == null)
