@@ -19,16 +19,39 @@ namespace MoviesApi.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllasync()
         {
-            var genres = await _context.genres.ToListAsync();
+            var genres = await _context.genres.OrderBy(g=>g.Name).ToListAsync();
             return Ok(genres);
         }
         [HttpPost]
-        public async Task<IActionResult> Createasync(CreateGenredto dto)
+        public async Task<IActionResult> Createasync(Genredto dto)
         {
             var grnre = new genre { Name = dto.Name };
             await _context.genres.AddAsync(grnre);
             _context.SaveChanges();
             return Ok(grnre);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult>Updateasync(int id,[FromBody] Genredto dto)
+        {
+            var genre = await _context.genres.SingleOrDefaultAsync(g => g.Id == id);
+            if (genre == null)
+                return NotFound($"No genre was found with Id:{id}");
+            genre.Name=dto.Name;
+            _context.SaveChanges();
+            return Ok(genre);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Deleteasync(int id)
+        {
+            var genre = await _context.genres.SingleOrDefaultAsync(g => g.Id == id);
+            if (genre == null)
+                return NotFound($"No genre was found with Id:{id}");
+            _context.genres.Remove(genre);
+            _context.SaveChanges();
+            return Ok(genre);
+
         }
     }
 }
