@@ -75,7 +75,7 @@ namespace MoviesApi.Controllers
 
         }
         [HttpPut("{id}")]
-        public async Task<IActionResult>UpdateAsync(int id,[FromBody] MovieDto dto)
+        public async Task<IActionResult>UpdateAsync(int id,[FromForm] MovieDto dto)
         {
             var movie = await _context.Movies.FindAsync(id);
             if (movie == null)

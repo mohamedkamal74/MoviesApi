@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using MoviesApi.Data;
+using MoviesApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(option =>
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("MovieConnection"));
 });
+
+builder.Services.AddTransient<IGenreService, GenreService>();
 
 var app = builder.Build();
 
