@@ -25,9 +25,10 @@ namespace MoviesApi.Services
             return movie;
         }
 
-        public async Task<IEnumerable<Movie>> GetAll()
+        public async Task<IEnumerable<Movie>> GetAll(byte genreId = 0)
         {
-          return   await _context.Movies.Include(g => g.genre).OrderByDescending(m => m.Rate).ToListAsync();
+            return await _context.Movies.Where(g => g.GenreId == genreId || genreId == 0)
+                  .Include(g => g.genre).OrderByDescending(m => m.Rate).ToListAsync();
         }
 
         public async Task<Movie> GetById(int id)
@@ -35,9 +36,9 @@ namespace MoviesApi.Services
             return await _context.Movies.Include(g => g.genre).SingleOrDefaultAsync(m => m.Id == id);
         }
 
-        public  Movie Update(Movie movie)
+        public Movie Update(Movie movie)
         {
-             _context.Movies.Update(movie);
+            _context.Movies.Update(movie);
             _context.SaveChanges();
             return movie;
         }

@@ -37,12 +37,12 @@ namespace MoviesApi.Controllers
             return Ok(movie);
         }
 
-        //[HttpGet("GetByGenreId")]
-        //public async Task<IActionResult> GetByGenreIdAsync(byte genreId)
-        //{
-        //    var movies = await _context.Movies.Where(m=>m.GenreId==genreId).Include(g => g.genre).OrderByDescending(m => m.Rate).ToListAsync();
-        //    return Ok(movies);
-        //}
+        [HttpGet("GetByGenreId")]
+        public async Task<IActionResult> GetByGenreIdAsync(byte genreId)
+        {
+            var movies = await _moviesService.GetAll(genreId);
+            return Ok(movies);
+        }
 
         [HttpPost]
         public async Task<IActionResult> CreateAsync([FromForm] MovieDto dto)
