@@ -18,6 +18,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(option =>
 });
 
 builder.Services.AddTransient<IGenreService, GenreService>();
+builder.Services.AddTransient<IMoviesService, MoviesService>();
 
 var app = builder.Build();
 
