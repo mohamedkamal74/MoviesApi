@@ -48,7 +48,7 @@ namespace MoviesApi.Controllers
         public async Task<IActionResult> CreateAsync([FromForm] MovieDto dto)
         {
             if(dto.Poster ==null)
-                return BadRequest("Pster is required");
+                return BadRequest("Poster is required");
             if (!_allowedExtention.Contains(Path.GetExtension(dto.Poster.FileName).ToLower()))
                 return BadRequest("only .jpg,.png movies are alloewd !");
 
@@ -106,9 +106,6 @@ namespace MoviesApi.Controllers
 
             _moviesService.Update(movie);
             return Ok(movie);
-
-                
-
         }
 
         [HttpDelete("{id}")]

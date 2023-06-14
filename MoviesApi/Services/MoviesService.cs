@@ -13,8 +13,6 @@ namespace MoviesApi.Services
         }
         public async Task<Movie> Create(Movie movie)
         {
-            await _context.Movies.AddAsync(movie);
-            _context.SaveChanges();
             return movie;
         }
 
